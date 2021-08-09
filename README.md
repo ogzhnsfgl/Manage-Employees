@@ -4,4 +4,4 @@ Manage Employees App created with React and React-Bootstrap. Using React Hooks a
 
 ## Soon
 
-- Currently datas was stored staticly in project. Next version has a feature that use LocalStorage to storage all data.
+- Currently, data was stored as code statically in project. Next version has a feature that use LocalStorage to storage all data.
