@@ -2,6 +2,7 @@ import { Form, Button } from "react-bootstrap";
 import { EmployeeContext } from "../context/EmployeeContext";
 import { useContext, useState } from "react";
 import Employee from "./Employee";
+import { v4 as uuidv4 } from "uuid";
 
 const AddForm = () => {
   const { addEmployee } = useContext(EmployeeContext);
@@ -11,6 +12,7 @@ const AddForm = () => {
   // const [phone, setPhone] = useState("");
 
   const [newEmployee, setNewEmployee] = useState({
+    id: uuidv4(),
     name: "",
     email: "",
     address: "",

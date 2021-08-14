@@ -4,12 +4,15 @@ import { Button, Modal, Alert } from "react-bootstrap";
 import AddForm from "./AddForm";
 import { EmployeeContext } from "../context/EmployeeContext";
 import { useEffect } from "react";
+import Pagination from "./Pagination";
 
 const EmployeeList = () => {
   const { employees } = useContext(EmployeeContext);
 
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [employeesPerPage] = useState(2);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,6 +31,13 @@ const EmployeeList = () => {
       handleShowAlert();
     };
   }, [employees]);
+
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentEmployees = employees
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .slice(indexOfFirstEmployee, indexOfLastEmployee);
+  const totalPagesNum = Math.ceil(employees.length / employeesPerPage);
 
   // const [count, setCount] = useState(0);
 
@@ -101,15 +111,19 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {employees
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .map((employee) => (
-              <tr key={employee.id}>
-                <Employee employee={employee}></Employee>
-              </tr>
-            ))}
+          {currentEmployees.map((employee) => (
+            <tr key={employee.id}>
+              <Employee employee={employee}></Employee>
+            </tr>
+          ))}
         </tbody>
       </table>
+      <Pagination
+        pages={totalPagesNum}
+        setCurrentPage={setCurrentPage}
+        employeesLength={employees.length}
+        currentEmployees={currentEmployees.length}
+      />
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton className="modal-header">
