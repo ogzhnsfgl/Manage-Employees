@@ -1,6 +1,7 @@
 import { Form, Button } from "react-bootstrap";
 import { EmployeeContext } from "../context/EmployeeContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+
 const AddForm = () => {
   const { addEmployee } = useContext(EmployeeContext);
   // const [name, setName] = useState("");
@@ -26,6 +27,16 @@ const AddForm = () => {
     console.log(newEmployee);
     addEmployee(newEmployee);
   };
+
+  // useEffect(() => {
+  //   console.log("Component Mounted!");
+  //   return () => {
+  //     console.log("Component Unmounted!");
+  //   };
+  // }, []);
+
+  // useEffect return ComponentDidUnmount işlevi görür.
+  //
 
   return (
     <Form onSubmit={handleSubmit}>
