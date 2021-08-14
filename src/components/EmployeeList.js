@@ -1,6 +1,6 @@
 import Employee from "./Employee";
 import { useState, useContext } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Alert } from "react-bootstrap";
 import AddForm from "./AddForm";
 import { EmployeeContext } from "../context/EmployeeContext";
 import { useEffect } from "react";
@@ -9,12 +9,24 @@ const EmployeeList = () => {
   const { employees } = useContext(EmployeeContext);
 
   const [show, setShow] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // const handleShowAlert = () => setShowAlert(true);
+
+  const handleShowAlert = () => {
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
+  };
 
   useEffect(() => {
     handleClose();
+    return () => {
+      handleShowAlert();
+    };
   }, [employees]);
 
   // const [count, setCount] = useState(0);
@@ -55,9 +67,8 @@ const EmployeeList = () => {
               Manage <b>Employees</b>
             </h2>
           </div>
+
           <div className="col-sm-6">
-            {/* <p>You clicked {count} times</p>
-            <button onClick={() => setCount(count + 1)}> Click Me!</button> */}
             <Button
               href="#addEmployeeModal"
               className="btn btn-success text-white"
@@ -70,6 +81,15 @@ const EmployeeList = () => {
           </div>
         </div>
       </div>
+      <Alert
+        show={showAlert}
+        variant={"success"}
+        onClose={() => setShowAlert(false)}
+        dismissible
+        style={{ height: "53px" }}
+      >
+        Employee list successfully updated!
+      </Alert>
       <table className="table table-striped table-hover">
         <thead>
           <tr>
@@ -81,11 +101,13 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
-            <tr key={employee.id}>
-              <Employee employee={employee}></Employee>
-            </tr>
-          ))}
+          {employees
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((employee) => (
+              <tr key={employee.id}>
+                <Employee employee={employee}></Employee>
+              </tr>
+            ))}
         </tbody>
       </table>
 

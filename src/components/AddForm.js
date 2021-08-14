@@ -1,6 +1,7 @@
 import { Form, Button } from "react-bootstrap";
 import { EmployeeContext } from "../context/EmployeeContext";
 import { useContext, useState } from "react";
+import Employee from "./Employee";
 
 const AddForm = () => {
   const { addEmployee } = useContext(EmployeeContext);
@@ -39,7 +40,7 @@ const AddForm = () => {
   //
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} key={Employee.id}>
       <Form.Group className="py-2">
         <Form.Control
           type="text"
