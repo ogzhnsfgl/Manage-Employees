@@ -1,5 +1,5 @@
 import Employee from "./Employee";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
 import AddForm from "./AddForm";
 import { EmployeeContext } from "../context/EmployeeContext";
@@ -81,7 +81,11 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          <Employee employees={employees}></Employee>
+          {employees.map((employee) => (
+            <tr key={employee.id}>
+              <Employee employee={employee}></Employee>
+            </tr>
+          ))}
         </tbody>
       </table>
 

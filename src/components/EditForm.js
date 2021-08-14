@@ -2,30 +2,26 @@ import { Form, Button } from "react-bootstrap";
 import { EmployeeContext } from "../context/EmployeeContext";
 import { useContext, useState } from "react";
 
-const AddForm = () => {
-  const { addEmployee } = useContext(EmployeeContext);
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [address, setAdress] = useState("");
-  // const [phone, setPhone] = useState("");
+const EditForm = ({ employee }) => {
+  const { updateEmployee } = useContext(EmployeeContext);
 
-  const [newEmployee, setNewEmployee] = useState({
-    name: "",
-    email: "",
-    address: "",
-    phone: "",
+  const [updatedEmployee, setupdatedEmployee] = useState({
+    id: employee.id,
+    name: employee.name,
+    email: employee.email,
+    address: employee.address,
+    phone: employee.phone,
   });
 
-  const { name, email, address, phone } = newEmployee;
+  const { name, email, address, phone } = updatedEmployee;
 
   const onInputChange = (e) => {
-    setNewEmployee({ ...newEmployee, [e.target.name]: e.target.value });
+    setupdatedEmployee({ ...updatedEmployee, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newEmployee);
-    addEmployee(newEmployee);
+    updateEmployee(e.target.id, updatedEmployee);
   };
 
   // useEffect(() => {
@@ -39,7 +35,7 @@ const AddForm = () => {
   //
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} id={employee.id}>
       <Form.Group className="py-2">
         <Form.Control
           type="text"
@@ -84,10 +80,10 @@ const AddForm = () => {
       </Form.Group>
 
       <Button variant="success" type="submit" className="w-100 mt-2">
-        Add New Employee
+        Update Employee
       </Button>
     </Form>
   );
 };
 
-export default AddForm;
+export default EditForm;
