@@ -15,7 +15,10 @@ const EmployeeList = () => {
   const [employeesPerPage] = useState(5);
 
   const handleClose = () => setShow(false);
-  const handleShow = (e) => (e.preventDefault(), setShow(true));
+  const handleShow = (e) => {
+    e.preventDefault();
+    setShow(true);
+  };
 
   const handleShowAlert = () => {
     setShowAlert(true);
@@ -139,7 +142,6 @@ const EmployeeList = () => {
           </Button>
         </Modal.Footer> */}
       </Modal>
-
       {/* <input ref={myRef} type="text"></input>
       <button onClick={onButtonClick}>Focus Input</button> */}
     </>

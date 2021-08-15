@@ -3,7 +3,7 @@ import { EmployeeContext } from "../context/EmployeeContext";
 import { useContext, useState } from "react";
 
 const EditForm = ({ employee }) => {
-  const { updateEmployee } = useContext(EmployeeContext);
+  const { dispatch } = useContext(EmployeeContext);
 
   const [updatedEmployee, setupdatedEmployee] = useState({
     id: employee.id,
@@ -13,7 +13,7 @@ const EditForm = ({ employee }) => {
     phone: employee.phone,
   });
 
-  const { name, email, address, phone } = updatedEmployee;
+  const { id, name, email, address, phone } = updatedEmployee;
 
   const onInputChange = (e) => {
     setupdatedEmployee({ ...updatedEmployee, [e.target.name]: e.target.value });
@@ -21,7 +21,11 @@ const EditForm = ({ employee }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateEmployee(e.target.id, updatedEmployee);
+    dispatch({
+      type: "update_employee",
+      id: id,
+      updatedEmployee: updatedEmployee,
+    });
   };
 
   // useEffect(() => {

@@ -5,11 +5,11 @@ import EditForm from "./EditForm";
 import { useEffect } from "react";
 
 const Employee = ({ employee }) => {
-  const { deleteEmployee } = useContext(EmployeeContext);
+  const { dispatch } = useContext(EmployeeContext);
 
   const handleClick = (e) => {
     e.preventDefault();
-    deleteEmployee(e.target.id);
+    dispatch({ type: "remove_employee", id: e.target.id });
   };
 
   const [show, setShow] = useState(false);

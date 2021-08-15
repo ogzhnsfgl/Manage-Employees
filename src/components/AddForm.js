@@ -2,17 +2,15 @@ import { Form, Button } from "react-bootstrap";
 import { EmployeeContext } from "../context/EmployeeContext";
 import { useContext, useState } from "react";
 import Employee from "./Employee";
-import { v4 as uuidv4 } from "uuid";
 
 const AddForm = () => {
-  const { addEmployee } = useContext(EmployeeContext);
+  const { dispatch } = useContext(EmployeeContext);
   // const [name, setName] = useState("");
   // const [email, setEmail] = useState("");
   // const [address, setAdress] = useState("");
   // const [phone, setPhone] = useState("");
 
   const [newEmployee, setNewEmployee] = useState({
-    id: uuidv4(),
     name: "",
     email: "",
     address: "",
@@ -27,7 +25,10 @@ const AddForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEmployee(newEmployee);
+    dispatch({
+      type: "add_employee",
+      employee: { name, email, address, phone },
+    });
   };
 
   // useEffect(() => {
