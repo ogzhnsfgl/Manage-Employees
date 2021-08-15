@@ -27,7 +27,6 @@ const AddForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newEmployee);
     addEmployee(newEmployee);
   };
 

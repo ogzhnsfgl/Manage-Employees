@@ -14,9 +14,12 @@ const Pagination = ({
 
   const [currentButton, setCurrentButton] = useState(1);
 
-  useEffect(() => {
-    setCurrentPage(currentButton);
-  }, [currentButton, setCurrentPage]);
+  useEffect(
+    (e) => {
+      setCurrentPage(currentButton);
+    },
+    [currentButton, setCurrentPage]
+  );
 
   return (
     <div className="clearfix">
@@ -33,9 +36,10 @@ const Pagination = ({
           <a
             href="#!"
             className="page-link"
-            onClick={() =>
-              setCurrentButton((prev) => (prev === 1 ? 1 : prev - 1))
-            }
+            onClick={(e) => {
+              e.preventDefault();
+              return setCurrentButton((prev) => (prev === 1 ? 1 : prev - 1));
+            }}
           >
             Previous
           </a>
@@ -50,7 +54,10 @@ const Pagination = ({
             <a
               href="#!"
               className="page-link"
-              onClick={() => setCurrentButton(page)}
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentButton(page);
+              }}
             >
               {page}
             </a>
@@ -67,11 +74,12 @@ const Pagination = ({
           <a
             href="#!"
             className="page-link"
-            onClick={() =>
-              setCurrentButton((prev) =>
+            onClick={(e) => {
+              e.preventDefault();
+              return setCurrentButton((prev) =>
                 prev === numOfPages.length ? numOfPages.length : prev + 1
-              )
-            }
+              );
+            }}
           >
             Next
           </a>
