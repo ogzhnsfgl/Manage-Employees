@@ -4,8 +4,6 @@ Manage Employees App created with React and React-Bootstrap. Using React Hooks a
 
 Live demo can be reachable from [here.](https://manage-employees.vercel.app/)
 
-
-
 ## Soon
 
-- Currently, data was stored as code statically in project. Next version has a feature that use LocalStorage to storage all data.
+- ~~Currently, data was stored as code statically in project. Next version has a feature that use LocalStorage to storage all data.~~ (Added with commit 10.)
